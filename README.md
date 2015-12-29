@@ -1,2 +1,2 @@
-# myscripts
-Collection of my hack-job bash, python and ruby scripts
+# My Scripts
+Collection of hack-job bash, python and ruby scripts
