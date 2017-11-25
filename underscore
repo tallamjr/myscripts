@@ -1,0 +1,7 @@
+#!/bin/bash
+# Replace whitespaces with underscores to all files in this directory and
+# recursivly
+for file in "$@"; do mv "$file" `echo $file | tr ' ' '_'` ; done
+# refs:
+# https://unix.stackexchange.com/questions/94207/recursively-add-a-file-to-all-sub-directories?rq=1
+# https://stackoverflow.com/questions/1806868/linux-replacing-spaces-in-the-file-names
