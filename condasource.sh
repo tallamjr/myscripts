@@ -10,7 +10,6 @@
 #
 #       source /path/to/conda_auto_env.sh
 #
-#!/bin/bash
 
 function conda_auto_env() {
   if [ -e "environment.yml" ]; then
