@@ -1,9 +1,21 @@
 #!/bin/bash
 
+# conda-auto-env automatically activates a conda environment when
+# entering a folder with an environment.yml file.
+#
+# If the environment doesn't exist, conda-auto-env creates it and
+# activates it for you.
+#
+# To install add this line to your .bashrc or .bash-profile:
+#
+#       source /path/to/conda_auto_env.sh
+#
+#!/bin/bash
+
 function conda_auto_env() {
   if [ -e "environment.yml" ]; then
     # echo "environment.yml file found"
-    # ENV=$(head -n 1 environment.yml | cut -f2 -d ' ')
+    # Get environment name associated with 'name' variable in file
     ENV=`grep 'name:' environment.yml | tail -n1 | awk '{ print $2}'`
 
     # Check if you are already in the environment
@@ -34,7 +46,7 @@ function conda_auto_env() {
                     echo "Ceasing creating of new conda environment";
                     break ;;
                 * )
-                    echo "Dafuq was that you entered?! Choose 1, or 2 fool!" ;;
+                    echo "Please Choose Option 1, or 2" ;;
             esac
         done
       fi
