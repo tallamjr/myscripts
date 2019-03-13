@@ -1,0 +1,4 @@
+#!/bin/bash
+
+## https://stackoverflow.com/a/36736959/4521950
+paste -sd '#\n' $1 | awk -F"#" '{d=$2 ; $2="";print NR" "strftime("%d/%m/%y %T",d)" "$0}' > ~/.bash_history_
