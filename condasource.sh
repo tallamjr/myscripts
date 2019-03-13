@@ -42,7 +42,7 @@ function conda_auto_env() {
                     conda activate $ENV;
                     break ;;
                 "IGNORE" )
-                    echo "Ceasing creating of new conda environment";
+                    echo "Ceasing creation of new conda environment";
                     break ;;
                 * )
                     echo "Please Choose Option 1, or 2" ;;
