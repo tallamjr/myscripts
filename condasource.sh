@@ -37,7 +37,6 @@ function conda_auto_env() {
             case $choice in
                 "CREATE" )
                     echo "Creating new conda environment from 'environment.yml' file found in folder..";
-                    sleep 2;
                     conda env create -q;
                     conda activate $ENV;
                     break ;;
