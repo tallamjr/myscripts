@@ -1,0 +1,48 @@
+#!/bin/bash
+export CONDA_BUILD_SYSROOT=/opt/MacOSX10.9.sdk
+export ARROW_REPO=$HOME/github/arrow
+export ARROW_BUILD_DIR=$ARROW_REPO/cpp/build
+export ARROW_PYTHON_DIR=$ARROW_REPO/python
+export CMAKE_OSX_SYSROOT=/opt/MacOSX10.9.sdk
+
+export CC=`which clang`
+export CXX=`which clang++`
+echo $CC
+echo $CXX
+
+rm -rf $ARROW_BUILD_DIR
+
+# mkdir $ARROW_REPO/dist
+# export ARROW_HOME=$ARROW_REPO/dist
+export ARROW_HOME=$CONDA_PREFIX
+
+mkdir $ARROW_BUILD_DIR
+pushd $ARROW_BUILD_DIR
+
+cmake -DCMAKE_INSTALL_PREFIX=$ARROW_HOME \
+      -DCONDA_BUILD_SYSROOT=/opt/MacOSX10.9.sdk \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DARROW_FLIGHT=OFF \
+      -DARROW_GANDIVA=OFF \
+      -DARROW_ORC=ON \
+      -DARROW_PARQUET=ON \
+      -DARROW_PYTHON=ON \
+      -DARROW_PLASMA=ON \
+      -DARROW_DEPENDENCY_SOURCE=AUTO \
+      -DARROW_BUILD_TESTS=ON \
+      -DPYTHON_EXECUTABLE=`which python` \
+      ..
+make -j4
+make install
+popd
+
+exitCode=$?
+if [ "$exitCode" == 0 ]; then
+    pushd $ARROW_PYTHON_DIR
+    export PYARROW_WITH_FLIGHT=0
+    export PYARROW_WITH_GANDIVA=0
+    export PYARROW_WITH_ORC=1
+    export PYARROW_WITH_PARQUET=1
+    python setup.py build_ext --inplace
+    popd
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash
+start=`date +%s`
+if [ "$CONDA_DEFAULT_ENV" == "airsenalenv" ]; then
+
+    rm /tmp/data.db
+
+    export AIRSENAL_HOME=$HOME/Github/AIrsenal
+
+    pushd $AIRSENAL_HOME
+
+    setup_airsenal_database
+    update_airsenal_database
+    run_airsenal_predictions --weeks_ahead 3 --num_thread 4
+    run_airsenal_optimization --weeks_ahead 3 --bank 16 --num_thread 4
+
+    popd
+
+    echo "FINISHED"
+
+fi
+end=`date +%s`
+RUNTIME=$((end-start))
+echo $RUNTIME

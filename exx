@@ -2,6 +2,7 @@
 
 # Extract any compressed file, courtsey http://efavdb.com/dotfiles/
 if [ -f "$1" ]; then
+    FILE="$1"
     case "$1" in
         *.tar.bz2)  tar -jxvf "$1"                        ;;
         *.tar.gz)   tar -zxvf "$1"                        ;;
@@ -11,7 +12,7 @@ if [ -f "$1" ]; then
         *.tar)      tar -xvf "$1"                         ;;
         *.tbz2)     tar -jxvf "$1"                        ;;
         *.tgz)      tar -zxvf "$1"                        ;;
-        *.zip)      unzip "$1"                            ;;
+        *.zip)      unzip "$1" -d "${FILE%%.*}"           ;;
         *.ZIP)      unzip "$1"                            ;;
         *.pax)      cat "$1" | pax -r                     ;;
         *.pax.Z)    uncompress "$1" --stdout | pax -r     ;;

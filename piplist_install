@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while read line; do
+    pip install $line
+    exitCode=$?
+    if [[ $exitCode != 0 ]]; then
+        echo "error with $line"
+        continue
+    fi
+    done < ~/piplist_awk.txt

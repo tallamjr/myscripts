@@ -1,0 +1,10 @@
+#!/bin/bash
+CPPFLAGS="-I$(brew --prefix openssl)/include" \
+    LDFLAGS="-L$(brew --prefix openssl)/lib" \
+    ./configure --with-pydebug
+
+export PANDAS_REPO=$HOME/Github/pandas
+pushd $PANDAS_REPO
+python setup.py build_ext --inplace -j 4
+python -m pip install -e . --no-build-isolation
+popd
