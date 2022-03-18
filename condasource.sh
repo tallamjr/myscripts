@@ -27,7 +27,7 @@ function conda_auto_env() {
         # Create the environment and activate
         echo "Conda env '$ENV' doesn't exist."
 
-        while true; do
+        for option in OPTION; do
             select choice in CREATE IGNORE
             do
                 echo "$REPLY : $choice"
