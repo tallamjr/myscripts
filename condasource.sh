@@ -17,7 +17,7 @@ function conda_auto_env() {
     # Get environment name associated with 'name' variable in file
     ENV=`grep 'name:' environment.yml | tail -n1 | awk '{ print $2}'`
 
-    # Check if you are already in the environment
+    Check if you are already in the environment
     if [[ $PATH != *$ENV* ]]; then
       # Check if the environment exists
       conda activate $ENV
@@ -33,7 +33,6 @@ function conda_auto_env() {
                 echo "$REPLY : $choice"
                 break
             done
-
             case $choice in
                 "CREATE" )
                     echo "Creating new conda environment from 'environment.yml' file found in folder..";
